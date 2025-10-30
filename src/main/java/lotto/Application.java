@@ -1,7 +1,11 @@
 package lotto;
 
+import lotto.adapter.inbound.LottoController;
+import lotto.infra.config.AppConfig;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        LottoController lottoController = AppConfig.lottoController();
+        lottoController.run();
     }
 }
