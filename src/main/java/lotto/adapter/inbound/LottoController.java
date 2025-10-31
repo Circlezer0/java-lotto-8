@@ -20,8 +20,10 @@ public class LottoController {
     }
 
     public void run() {
-        Integer money = displayAndReadMoney();
-        Lottos lottos = purchaseLottosAndDisplay(money);
+        Integer money = readMoney();
+
+        Lottos lottos = purchaseLottos(money);
+        displayBoughtLottos(lottos);
 
         Winning winningNumber = drawWinningNumber();
 
@@ -32,45 +34,46 @@ public class LottoController {
         displayLottoResult(lottoResult, yield);
     }
 
-    private Integer displayAndReadMoney(){
+    private Integer readMoney(){
         outputView.displayMoneyInputGuide();
-        return inputView.readInteger();
+        Integer money = inputView.readInteger();
+        outputView.displayEmptyLine();
+        return money;
     }
 
-    private Lottos purchaseLottosAndDisplay(Integer money){
-        outputView.displayEmptyLine();
-
+    private Lottos purchaseLottos(Integer money){
         BuyCommand command = new BuyCommand(money);
-        Lottos lottos = lottoService.buyLottos(command);
+        return lottoService.buyLottos(command);
+    }
 
+    private void displayBoughtLottos(Lottos lottos){
         outputView.displayBoughtLotto(lottos);
-        return lottos;
+        outputView.displayEmptyLine();
     }
 
     private Winning drawWinningNumber(){
-        List<Integer> winningNumbers = displayAndReadWinningNumbers();
-        Integer bonusNumber = displayAndReadBonusNumber();
+        List<Integer> winningNumbers = readWinningNumbers();
+        Integer bonusNumber = readBonusNumber();
 
         DrawWinningCommand command = new DrawWinningCommand(winningNumbers, bonusNumber);
         return lottoService.drawWinning(command);
     }
 
-    private Integer displayAndReadBonusNumber() {
+    private List<Integer> readWinningNumbers() {
+        outputView.displayWinningInputGuide();
+        List<Integer> winningNumbers = inputView.readIntegers();
         outputView.displayEmptyLine();
-
-        outputView.displayBonusInputGuide();
-        return inputView.readInteger();
+        return winningNumbers;
     }
 
-    private List<Integer> displayAndReadWinningNumbers() {
+    private Integer readBonusNumber() {
+        outputView.displayBonusInputGuide();
+        Integer bonusNumber = inputView.readInteger();
         outputView.displayEmptyLine();
-
-        outputView.displayWinningInputGuide();
-        return inputView.readIntegers();
+        return bonusNumber;
     }
 
     private void displayLottoResult(LottoResult lottoResult, double yield) {
-        outputView.displayEmptyLine();
         outputView.displayLottoResults(lottoResult, yield);
     }
 }
