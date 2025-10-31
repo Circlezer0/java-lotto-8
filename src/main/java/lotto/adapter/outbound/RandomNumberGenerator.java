@@ -2,7 +2,7 @@ package lotto.adapter.outbound;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.List;
-import lotto.domain.model.NumberGenerator;
+import lotto.application.port.output.NumberGenerator;
 import lotto.domain.policy.NumberPolicy;
 
 public class RandomNumberGenerator implements NumberGenerator {

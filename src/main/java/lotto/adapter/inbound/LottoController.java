@@ -1,7 +1,7 @@
 package lotto.adapter.inbound;
 
 import java.util.List;
-import lotto.application.LottoService;
+import lotto.application.port.input.LottoService;
 import lotto.application.dto.BuyCommand;
 import lotto.application.dto.DrawWinningCommand;
 import lotto.domain.collection.Lottos;

@@ -1,4 +1,4 @@
-package lotto.application;
+package lotto.application.port.input;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -7,7 +7,7 @@ import lotto.application.dto.DrawWinningCommand;
 import lotto.domain.collection.Lottos;
 import lotto.domain.collection.LottoResult;
 import lotto.domain.model.Lotto;
-import lotto.domain.model.NumberGenerator;
+import lotto.application.port.output.NumberGenerator;
 import lotto.domain.model.Winning;
 import lotto.domain.vo.Money;
 
