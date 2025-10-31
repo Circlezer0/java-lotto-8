@@ -30,7 +30,7 @@ public class OutputView {
     }
 
     public void displayBoughtLotto(Lottos lottos) {
-        System.out.printf(BOUGHT_COUNT_FORMAT, lottos.count());
+        System.out.printf(BOUGHT_COUNT_FORMAT, lottos.size());
         System.out.println();
         lottos.stream()
                 .forEach(lotto -> System.out.println(formatLottoNumbers(lotto)));
@@ -64,8 +64,7 @@ public class OutputView {
     }
 
     private String formatLottoNumbers(Lotto lotto) {
-        return lotto.getNumbers()
-                .stream()
+        return lotto.stream()
                 .sorted()
                 .map(String::valueOf)
                 .collect(Collectors.joining(",", "[", "]"));

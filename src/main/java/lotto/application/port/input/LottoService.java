@@ -42,7 +42,7 @@ public class LottoService {
 
     public double calculateYield(Lottos lottos, LottoResult lottoResult) {
         long totalPrize = lottoResult.totalPrize();
-        int spentMoney = lottos.count() * LOTTO_PRICE;
+        int spentMoney = lottos.size() * LOTTO_PRICE;
         return (double) totalPrize / spentMoney * 100.0;
     }
 }

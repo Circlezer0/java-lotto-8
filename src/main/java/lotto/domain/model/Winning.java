@@ -13,11 +13,11 @@ public class Winning {
         this.bonusNumber = bonusNumber;
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
-    }
-
-    public int getBonusNumber() {
-        return bonusNumber;
+    public Rank evaluateRank(Lotto lotto) {
+        int matchCount = (int) lotto.stream()
+                .filter(numbers::contains)
+                .count();
+        boolean bonusMatch = lotto.stream().anyMatch(num -> num == bonusNumber);
+        return Rank.of(matchCount, bonusMatch);
     }
 }

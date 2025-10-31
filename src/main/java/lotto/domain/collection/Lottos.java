@@ -20,13 +20,13 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public int count() {
+    public int size() {
         return lottos.size();
     }
 
     public LottoResult evaluateAllRank(Winning winning) {
         List<Rank> ranks = lottos.stream()
-                .map(lotto -> lotto.evaluateRank(winning))
+                .map(winning::evaluateRank)
                 .toList();
 
         return LottoResult.from(ranks);
