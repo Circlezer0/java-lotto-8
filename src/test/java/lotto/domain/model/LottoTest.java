@@ -57,18 +57,22 @@ class LottoTest {
     @DisplayName("로또 번호 개수가 6개보다 작으면 예외가 발생한다.")
     void numberCountLessThanSix() {
         assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5)))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageStartingWith("[ERROR]");
         assertThatThrownBy(() -> new Lotto(List.of()))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageStartingWith("[ERROR]");
     }
 
     @Test
     @DisplayName("로또 번호가 1~45 범위를 벗어나면 예외가 발생한다.")
     void numberOutOfRange() {
         assertThatThrownBy(() -> new Lotto(List.of(0, 2, 3, 4, 5, 6)))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageStartingWith("[ERROR]");
 
         assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 46)))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageStartingWith("[ERROR]");
     }
 }
