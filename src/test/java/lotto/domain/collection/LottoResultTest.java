@@ -63,7 +63,7 @@ public class LottoResultTest {
         // When & Then
         assertThatThrownBy(() -> LottoResult.from(null))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageStartingWith("[Error]");
+                .hasMessageStartingWith("[ERROR]");
     }
 
     @ParameterizedTest(name = "tiers={0} → expectedTotal={1}")
