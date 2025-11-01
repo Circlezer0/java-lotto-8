@@ -1,7 +1,7 @@
 package lotto.domain.collection;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -58,10 +58,12 @@ public class LottoResultTest {
     }
 
     @Test
-    @DisplayName("from: null 리스트면 NPE 발생")
+    @DisplayName("null 리스트 입력 시 IllegalArgumentException 발생")
     void nullListThrowsIllegalArgumentException() {
         // When & Then
-        assertThrows(NullPointerException.class, () -> LottoResult.from(null));
+        assertThatThrownBy(() -> LottoResult.from(null))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageStartingWith("[Error]");
     }
 
     @ParameterizedTest(name = "tiers={0} → expectedTotal={1}")
