@@ -2,11 +2,15 @@ package lotto.domain.model;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class WinningNumberTest {
@@ -20,6 +24,33 @@ public class WinningNumberTest {
 
         // When & Then
         assertDoesNotThrow(() -> new WinningNumber(winningNumbers, bonusNumber));
+    }
+
+    @ParameterizedTest
+    @MethodSource("prizeTestSet")
+    @DisplayName("당첨 등수 확인 테스트")
+    void prizeTierTest(List<Integer> winningNumbers, int bonusNumber, List<Integer> playerNumbers, PrizeTier expectedPrizeTier) {
+        // Given
+        WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusNumber);
+        Lotto playerLotto = new Lotto(playerNumbers);
+
+        // When
+        PrizeTier actualPrizeTier = winningNumber.evaluatePrizeTier(playerLotto);
+
+        // Then
+        assertEquals(expectedPrizeTier, actualPrizeTier);
+    }
+
+    private static Stream<Arguments> prizeTestSet(){
+        return Stream.of(
+                Arguments.of(List.of(3, 11, 15, 29, 35, 45), 7, List.of(3, 11, 15, 29, 35, 45), PrizeTier.SIX_MATCHES),
+                Arguments.of(List.of(3, 11, 15, 29, 35, 45), 7, List.of(3, 11, 15, 29, 35, 7), PrizeTier.FIVE_WITH_BONUS_MATCHES),
+                Arguments.of(List.of(3, 11, 15, 29, 35, 45), 7, List.of(3, 11, 15, 29, 9, 45), PrizeTier.FIVE_MATCHES),
+                Arguments.of(List.of(3, 11, 15, 29, 35, 45), 7, List.of(8, 11, 15, 35, 41, 45), PrizeTier.FOUR_MATCHES),
+                Arguments.of(List.of(3, 11, 15, 29, 35, 45), 7, List.of(3, 9, 15, 25, 33, 45), PrizeTier.THREE_MATCHES),
+                Arguments.of(List.of(3, 11, 15, 29, 35, 45), 7, List.of(15, 22, 28, 30, 33, 44), PrizeTier.NO_RANK),
+                Arguments.of(List.of(3, 11, 15, 29, 35, 45), 7, List.of(1, 2, 4, 5, 6, 7), PrizeTier.NO_RANK)
+        );
     }
 
     @Test
