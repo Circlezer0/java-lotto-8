@@ -22,7 +22,7 @@ public enum PrizeTier {
 
     public long getPrizeMoney() { return prizeMoney; }
 
-    public static PrizeTier of(int matchCount, boolean hasBonus) {
+    public static PrizeTier from(int matchCount, boolean hasBonus) {
         return Arrays.stream(values())
                 .filter(t -> t.matchRule.test(matchCount, hasBonus))
                 .findFirst()

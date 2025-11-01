@@ -27,7 +27,7 @@ public class PrizeTierTest {
     })
     void prizeTierDeterminationTest(int matchCount, boolean bonusMatch, PrizeTier expectedRank) {
         // When
-        PrizeTier actualRank = PrizeTier.of(matchCount, bonusMatch);
+        PrizeTier actualRank = PrizeTier.from(matchCount, bonusMatch);
 
         // Then
         assertEquals(expectedRank, actualRank);
