@@ -12,6 +12,14 @@ public class WinningNumber {
         this.bonusNumber = bonusNumber;
     }
 
+    public PrizeTier evaluatePrizeTier(Lotto lotto) {
+        int matchCount = (int) numbers.stream()
+                .filter(lotto::contains)
+                .count();
+        boolean bonusMatch = lotto.contains(bonusNumber);
+        return PrizeTier.from(matchCount, bonusMatch);
+    }
+
     private void validate(List<Integer> numbers, int bonusNumber) {
         validateSize(numbers);
         validateDuplicate(numbers);
