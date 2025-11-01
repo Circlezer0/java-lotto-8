@@ -16,6 +16,14 @@ public class Lotto {
         numbers.forEach(Lotto::validateNumberRange);
     }
 
+    public boolean contains(int number) {
+        return numbers.contains(number);
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
+
     private static void validateSize(List<Integer> numbers) {
         if (numbers == null) {
             throw new IllegalArgumentException("[ERROR] 로또 번호 리스트는 null일 수 없습니다.");
