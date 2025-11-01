@@ -13,6 +13,10 @@ public class LottoResult {
     }
 
     public static LottoResult from(List<PrizeTier> calculatedRanks) {
+        if(calculatedRanks == null) {
+            throw new IllegalArgumentException("[ERROR] 계산 된 등수 리스트는 null일 수 없습니다.");
+        }
+
         EnumMap<PrizeTier, Integer> counts = new EnumMap<>(PrizeTier.class);
 
         for (PrizeTier rank : calculatedRanks) {
