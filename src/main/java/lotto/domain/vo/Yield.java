@@ -8,10 +8,6 @@ import lotto.exception.code.DomainErrorCode;
 public record Yield(BigDecimal percentage) {
     private static final BigDecimal MULTIPLIER = BigDecimal.valueOf(100);
 
-    public Yield(BigDecimal percentage) {
-        this.percentage = percentage;
-    }
-
     public static Yield from(long totalPrize, int spentMoney) {
         if (spentMoney <= 0) {
             throw new LottoException(DomainErrorCode.INVALID_SPENT_MONEY);
