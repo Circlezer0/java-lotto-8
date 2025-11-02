@@ -33,7 +33,7 @@ public class LottoResult {
                 .sum();
     }
 
-    public int count(PrizeTier rank) {
-        return counts.getOrDefault(rank, 0);
+    public int count(PrizeTier prizeTier) {
+        return counts.getOrDefault(prizeTier, 0);
     }
 }
