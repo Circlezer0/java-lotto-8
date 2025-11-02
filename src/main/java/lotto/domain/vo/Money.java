@@ -1,12 +1,15 @@
 package lotto.domain.vo;
 
+import lotto.exception.LottoException;
+import lotto.exception.code.DomainErrorCode;
+
 public record Money(int money) {
     private static final int MIN = 0;
     private static final int MAX = 1_000_000_000;
 
     public Money {
         if (money <= MIN || money > MAX) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 금액입니다.");
+            throw new LottoException(DomainErrorCode.INVALID_MONEY_AMOUNT);
         }
     }
 
@@ -15,12 +18,14 @@ public record Money(int money) {
     }
 
     public int purchaseQuantity(int unitPrice) {
-        if (unitPrice <= 0) throw new IllegalArgumentException("[ERROR] 유효하지 않은 단가입니다.");
+        if (unitPrice <= 0) {
+            throw new LottoException(DomainErrorCode.INVALID_UNIT_PRICE);
+        }
         if (money < unitPrice) {
-            throw new IllegalArgumentException("[ERROR] 로또를 구매할 수 없습니다.");
+            throw new LottoException(DomainErrorCode.INSUFFICIENT_MONEY);
         }
         if (money % unitPrice != 0) {
-            throw new IllegalArgumentException("[ERROR] 금액이 나누어 떨어지지 않습니다.");
+            throw new LottoException(DomainErrorCode.AMOUNT_NOT_DIVISIBLE);
         }
         return money / unitPrice;
     }
