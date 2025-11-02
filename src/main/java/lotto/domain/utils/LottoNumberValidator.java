@@ -1,6 +1,8 @@
 package lotto.domain.utils;
 
 import java.util.List;
+import lotto.exception.LottoException;
+import lotto.exception.code.DomainErrorCode;
 
 public class LottoNumberValidator {
 
@@ -8,7 +10,7 @@ public class LottoNumberValidator {
 
     public static void validateNumbers(List<Integer> numbers) {
         if(numbers == null){
-            throw new IllegalArgumentException("[ERROR] 번호 리스트는 null일 수 없습니다.");
+            throw new LottoException(DomainErrorCode.NUMBERS_CANNOT_BE_NULL);
         }
         validateSize(numbers);
         numbers.forEach(LottoNumberValidator::validateRange);
@@ -19,26 +21,26 @@ public class LottoNumberValidator {
         validateNumbers(numbers);
         validateRange(bonusNumber);
         if (numbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.");
+            throw new LottoException(DomainErrorCode.BONUS_NUMBER_CANNOT_DUPLICATE);
         }
     }
 
     public static void validateSize(List<Integer> numbers) {
         if (numbers.size() != LottoGameRule.PICK_COUNT) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");
+            throw new LottoException(DomainErrorCode.INVALID_NUMBER_COUNT);
         }
     }
 
     public static void validateRange(int number) {
         if (number < LottoGameRule.MIN_NUMBER || number > LottoGameRule.MAX_NUMBER) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+            throw new LottoException(DomainErrorCode.INVALID_NUMBER);
         }
     }
 
     public static void validateDuplicate(List<Integer> numbers) {
         long distinctCount = numbers.stream().distinct().count();
         if (distinctCount != numbers.size()) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 중복될 수 없습니다.");
+            throw new LottoException(DomainErrorCode.NUMBERS_CANNOT_DUPLICATE);
         }
     }
 }
