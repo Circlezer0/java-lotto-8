@@ -29,6 +29,30 @@ public class RandomNumberGeneratorTest {
     }
 
     @ParameterizedTest
+    @DisplayName("유효한 정수 엣지 케이스들 테스트")
+    @CsvSource({
+            "1, 1, 1",
+            "1, 2, 2",
+            "45, 45, 1",
+            "44, 45, 2",
+            "1, 45, 0",
+            "1, 45, 45"
+    })
+    void generateNumbersEdgeCasesTest(int min, int max, int count) {
+        // Given
+        RandomNumberGenerator generator = new RandomNumberGenerator();
+
+        // When
+        List<Integer> numbers = generator.uniqueNumbersInRange(min, max, count);
+
+        // Then
+        assertThat(numbers)
+                .hasSize(count)
+                .allMatch(num -> num >= min && num <= max)
+                .doesNotHaveDuplicates();
+    }
+
+    @ParameterizedTest
     @DisplayName("범위 내에서 중복되지 않는 숫자를 생성할 수 없을 때 예외 발생")
     @CsvSource({
             "1, 5, 10",
