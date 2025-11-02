@@ -8,7 +8,7 @@ public class WinningNumber {
     private final int bonusNumber;
 
     public WinningNumber(List<Integer> numbers, int bonusNumber) {
-        validate(numbers, bonusNumber);
+        LottoNumberValidator.validateWinning(numbers, bonusNumber);
         this.numbers = numbers.stream().sorted().toList();
         this.bonusNumber = bonusNumber;
     }
@@ -19,9 +19,5 @@ public class WinningNumber {
                 .count();
         boolean bonusMatch = lotto.contains(bonusNumber);
         return PrizeTier.from(matchCount, bonusMatch);
-    }
-
-    private void validate(List<Integer> numbers, int bonusNumber) {
-        LottoNumberValidator.validateWinning(numbers, bonusNumber);
     }
 }
