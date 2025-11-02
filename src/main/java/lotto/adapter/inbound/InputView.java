@@ -3,6 +3,8 @@ package lotto.adapter.inbound;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 import java.util.List;
+import lotto.exception.LottoException;
+import lotto.exception.code.AdapterErrorCode;
 
 public class InputView {
 
@@ -23,7 +25,7 @@ public class InputView {
         try {
             return Integer.parseInt(input.trim());
         } catch (Exception e) {
-            throw new IllegalArgumentException("[ERROR] 입력한 숫자가 유효하지 않습니다.");
+            throw new LottoException(AdapterErrorCode.INVALID_INPUT_NUMBER);
         }
     }
 }
