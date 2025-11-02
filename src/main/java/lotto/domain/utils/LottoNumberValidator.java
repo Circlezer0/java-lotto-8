@@ -7,6 +7,9 @@ public class LottoNumberValidator {
     private LottoNumberValidator() {}
 
     public static void validateNumbers(List<Integer> numbers) {
+        if(numbers == null){
+            throw new IllegalArgumentException("[ERROR] 번호 리스트는 null일 수 없습니다.");
+        }
         validateSize(numbers);
         numbers.forEach(LottoNumberValidator::validateRange);
         validateDuplicate(numbers);
@@ -14,6 +17,7 @@ public class LottoNumberValidator {
 
     public static void validateWinning(List<Integer> numbers, int bonusNumber) {
         validateNumbers(numbers);
+        validateRange(bonusNumber);
         if (numbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.");
         }
