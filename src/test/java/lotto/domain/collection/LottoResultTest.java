@@ -81,7 +81,7 @@ public class LottoResultTest {
         return Stream.of(
                 Arguments.of(
                         List.of(PrizeTier.SIX_MATCHES),
-                        PrizeTier.SIX_MATCHES.getPrizeMoney()
+                        PrizeTier.SIX_MATCHES.prizeMoney()
                 ),
                 Arguments.of(
                         List.of(
@@ -90,10 +90,10 @@ public class LottoResultTest {
                                 PrizeTier.FOUR_MATCHES, PrizeTier.FOUR_MATCHES, PrizeTier.FOUR_MATCHES,
                                 PrizeTier.NO_RANK, PrizeTier.NO_RANK
                         ),
-                        PrizeTier.FIVE_WITH_BONUS_MATCHES.getPrizeMoney()
-                                + 2L * PrizeTier.FIVE_MATCHES.getPrizeMoney()
-                                + 3L * PrizeTier.FOUR_MATCHES.getPrizeMoney()
-                                + 2L * PrizeTier.NO_RANK.getPrizeMoney() // = 0
+                        PrizeTier.FIVE_WITH_BONUS_MATCHES.prizeMoney()
+                                + 2L * PrizeTier.FIVE_MATCHES.prizeMoney()
+                                + 3L * PrizeTier.FOUR_MATCHES.prizeMoney()
+                                + 2L * PrizeTier.NO_RANK.prizeMoney() // = 0
                 ),
                 Arguments.of(
                         List.of(
@@ -102,10 +102,10 @@ public class LottoResultTest {
                                 PrizeTier.FIVE_WITH_BONUS_MATCHES,
                                 PrizeTier.NO_RANK
                         ),
-                        3L * PrizeTier.THREE_MATCHES.getPrizeMoney()
-                                + PrizeTier.FOUR_MATCHES.getPrizeMoney()
-                                + PrizeTier.FIVE_WITH_BONUS_MATCHES.getPrizeMoney()
-                                + PrizeTier.NO_RANK.getPrizeMoney()
+                        3L * PrizeTier.THREE_MATCHES.prizeMoney()
+                                + PrizeTier.FOUR_MATCHES.prizeMoney()
+                                + PrizeTier.FIVE_WITH_BONUS_MATCHES.prizeMoney()
+                                + PrizeTier.NO_RANK.prizeMoney()
                 )
         );
     }

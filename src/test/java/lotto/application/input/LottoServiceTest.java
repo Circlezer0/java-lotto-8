@@ -117,8 +117,8 @@ public class LottoServiceTest {
         Yield yield = lottoService.calculateYield(lotteries, lottoResult);
 
         // Then
-        long totalPrizeMoney = PrizeTier.SIX_MATCHES.getPrizeMoney()
-                + PrizeTier.FIVE_WITH_BONUS_MATCHES.getPrizeMoney();
+        long totalPrizeMoney = PrizeTier.SIX_MATCHES.prizeMoney()
+                + PrizeTier.FIVE_WITH_BONUS_MATCHES.prizeMoney();
         BigDecimal expectedYield = BigDecimal.valueOf(totalPrizeMoney)
                 .divide(BigDecimal.valueOf((long) LottoGameRule.LOTTO_PRICE * lotteries.size()), 1, RoundingMode.HALF_UP)
                 .multiply(BigDecimal.valueOf(100));

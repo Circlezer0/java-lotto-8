@@ -45,7 +45,7 @@ public class PrizeTierTest {
     })
     void prizeMoneyTest(PrizeTier rank, long expectedPrizeMoney) {
         // When
-        long actualPrizeMoney = rank.getPrizeMoney();
+        long actualPrizeMoney = rank.prizeMoney();
 
         // Then
         assertEquals(expectedPrizeMoney, actualPrizeMoney);
