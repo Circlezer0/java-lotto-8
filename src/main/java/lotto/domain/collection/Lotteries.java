@@ -5,13 +5,15 @@ import java.util.List;
 import lotto.domain.model.Lotto;
 import lotto.domain.model.PrizeTier;
 import lotto.domain.model.WinningNumber;
+import lotto.exception.LottoException;
+import lotto.exception.code.DomainErrorCode;
 
 public class Lotteries {
     private final List<Lotto> lotteries;
 
     private Lotteries(List<Lotto> lotteries) {
-        if(lotteries == null) {
-            throw new IllegalArgumentException("[ERROR] 로또 목록은 null일 수 없습니다.");
+        if(lotteries == null || lotteries.isEmpty()) {
+            throw new LottoException(DomainErrorCode.LOTTO_LIST_CANNOT_BE_NULL);
         }
         this.lotteries = List.copyOf(lotteries);
     }
