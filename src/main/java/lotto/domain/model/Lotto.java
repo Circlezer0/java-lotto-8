@@ -12,9 +12,7 @@ public class Lotto {
     }
 
     private void validate(List<Integer> numbers) {
-        LottoNumberValidator.validateSize(numbers);
-        LottoNumberValidator.validateDuplicate(numbers);
-        numbers.forEach(LottoNumberValidator::validateRange);
+        LottoNumberValidator.validateNumbers(numbers);
     }
 
     public boolean contains(int number) {
