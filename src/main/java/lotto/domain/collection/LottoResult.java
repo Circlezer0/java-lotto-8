@@ -3,37 +3,39 @@ package lotto.domain.collection;
 import java.util.EnumMap;
 import java.util.List;
 import lotto.domain.model.PrizeTier;
+import lotto.exception.LottoException;
+import lotto.exception.code.DomainErrorCode;
 
 public class LottoResult {
 
-    private final EnumMap<PrizeTier, Integer> counts;
+    private final EnumMap<PrizeTier, Integer> tierCounts;
 
-    private LottoResult(EnumMap<PrizeTier, Integer> counts) {
-        this.counts = new EnumMap<>(counts);
+    private LottoResult(EnumMap<PrizeTier, Integer> tierCounts) {
+        this.tierCounts = new EnumMap<>(tierCounts);
     }
 
-    public static LottoResult from(List<PrizeTier> calculatedRanks) {
-        if(calculatedRanks == null) {
-            throw new IllegalArgumentException("[ERROR] 계산 된 등수 리스트는 null일 수 없습니다.");
+    public static LottoResult from(List<PrizeTier> calculatedPrizeTiers) {
+        if(calculatedPrizeTiers == null || calculatedPrizeTiers.isEmpty()) {
+            throw new LottoException(DomainErrorCode.PRIZE_LIST_CANNOT_BE_NULL);
         }
 
         EnumMap<PrizeTier, Integer> counts = new EnumMap<>(PrizeTier.class);
 
-        for (PrizeTier rank : calculatedRanks) {
-            counts.merge(rank, 1, Integer::sum);
+        for (PrizeTier prizeTier : calculatedPrizeTiers) {
+            counts.merge(prizeTier, 1, Integer::sum);
         }
 
         return new LottoResult(counts);
     }
 
     public long totalPrize() {
-        return counts.entrySet()
+        return tierCounts.entrySet()
                 .stream()
                 .mapToLong(e -> e.getKey().prizeMoney() * e.getValue())
                 .sum();
     }
 
     public int count(PrizeTier prizeTier) {
-        return counts.getOrDefault(prizeTier, 0);
+        return tierCounts.getOrDefault(prizeTier, 0);
     }
 }
