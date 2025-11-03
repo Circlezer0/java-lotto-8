@@ -8,6 +8,7 @@ import lotto.domain.collection.LottoResult;
 import lotto.domain.model.Lotto;
 import lotto.domain.model.PrizeTier;
 import lotto.domain.vo.Yield;
+import lotto.exception.LottoException;
 
 public class OutputView {
     private static final String BOUGHT_COUNT_FORMAT = "%d개를 구매했습니다.";
@@ -24,7 +25,7 @@ public class OutputView {
     private static final String BONUS_STRING = ", 보너스 볼 일치";
     private static final String YIELD_FORMAT = "총 수익률은 %s%%입니다.";
 
-    public void displayErrorMessage(IllegalArgumentException exception) {
+    public void displayErrorMessage(LottoException exception) {
         System.out.println(exception.getMessage());
         System.out.println();
     }

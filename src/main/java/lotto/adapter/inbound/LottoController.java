@@ -8,6 +8,7 @@ import lotto.domain.collection.LottoResult;
 import lotto.domain.model.WinningNumber;
 import lotto.domain.vo.Money;
 import lotto.domain.vo.Yield;
+import lotto.exception.LottoException;
 
 public class LottoController {
     private final InputView inputView;
@@ -84,7 +85,7 @@ public class LottoController {
         while (true) {
             try {
                 return supplier.get();
-            } catch (IllegalArgumentException exception) {
+            } catch (LottoException exception) {
                 outputView.displayErrorMessage(exception);
             }
         }
