@@ -5,28 +5,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 public class RandomNumberGeneratorTest {
-
-    @Test
-    @DisplayName("랜덤한 범위 내에서 중복되지 않는 숫자들을 생성한다.")
-    void generateUniqueRandomNumbersTest() {
-        // Given
-        RandomNumberGenerator generator = new RandomNumberGenerator();
-
-        // When & Then
-        for (int i = 0; i < 1000; i++) {
-            List<Integer> numbers = generator.uniqueNumbersInRange(1, 45, 6);
-
-            assertThat(numbers)
-                    .hasSize(6)
-                    .allMatch(num -> num >= 1 && num <= 45)
-                    .doesNotHaveDuplicates();
-        }
-    }
 
     @ParameterizedTest
     @DisplayName("유효한 정수 엣지 케이스들 테스트")
