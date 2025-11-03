@@ -2,6 +2,7 @@ package lotto.adapter.inbound;
 
 import java.util.List;
 import java.util.function.Supplier;
+import lotto.application.port.input.LottoUseCase;
 import lotto.application.service.LottoService;
 import lotto.domain.collection.Lotteries;
 import lotto.domain.collection.LottoResult;
@@ -13,12 +14,12 @@ import lotto.exception.LottoException;
 public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
-    private final LottoService lottoService;
+    private final LottoUseCase lottoUseCase;
 
-    public LottoController(InputView inputView, OutputView outputView, LottoService lottoService) {
+    public LottoController(InputView inputView, OutputView outputView, LottoService lottoUseCase) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.lottoService = lottoService;
+        this.lottoUseCase = lottoUseCase;
     }
 
     public void run() {
@@ -27,9 +28,9 @@ public class LottoController {
         displayBoughtLotteries(lotteries);
 
         WinningNumber winningNumber = drawWinningNumber();
-        LottoResult result = lottoService.evaluateLotteries(lotteries, winningNumber);
+        LottoResult result = lottoUseCase.evaluateLotteries(lotteries, winningNumber);
 
-        Yield yield = lottoService.calculateYield(lotteries, result);
+        Yield yield = lottoUseCase.calculateYield(lotteries, result);
         displayResult(result, yield);
     }
 
@@ -43,7 +44,7 @@ public class LottoController {
     }
 
     private Lotteries purchaseLotteries(Money money) {
-        return lottoService.buyLotteries(money);
+        return lottoUseCase.buyLotteries(money);
     }
 
     private void displayBoughtLotteries(Lotteries lotteries) {
@@ -55,7 +56,7 @@ public class LottoController {
         return executeUntilValid(() -> {
             List<Integer> winningNumbers = readWinningNumbers();
             Integer bonusNumber = readBonusNumber();
-            return lottoService.drawWinningNumber(winningNumbers, bonusNumber);
+            return lottoUseCase.drawWinningNumber(winningNumbers, bonusNumber);
         });
     }
 

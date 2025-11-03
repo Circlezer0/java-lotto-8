@@ -1,4 +1,4 @@
-package lotto.application.input;
+package lotto.application.service;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersInRangeTest;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -9,7 +9,6 @@ import java.math.RoundingMode;
 import java.util.Iterator;
 import java.util.List;
 import lotto.adapter.outbound.RandomNumberGenerator;
-import lotto.application.service.LottoService;
 import lotto.domain.collection.Lotteries;
 import lotto.domain.collection.LottoResult;
 import lotto.domain.model.Lotto;
