@@ -3,7 +3,6 @@ package lotto.adapter.inbound;
 import java.util.List;
 import java.util.function.Supplier;
 import lotto.application.port.input.LottoUseCase;
-import lotto.application.service.LottoService;
 import lotto.domain.collection.Lotteries;
 import lotto.domain.collection.LottoResult;
 import lotto.domain.model.WinningNumber;
@@ -16,7 +15,7 @@ public class LottoController {
     private final OutputView outputView;
     private final LottoUseCase lottoUseCase;
 
-    public LottoController(InputView inputView, OutputView outputView, LottoService lottoUseCase) {
+    public LottoController(InputView inputView, OutputView outputView, LottoUseCase lottoUseCase) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.lottoUseCase = lottoUseCase;
