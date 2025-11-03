@@ -33,7 +33,7 @@ public class LotteriesTest {
                 new Lotto(List.of(1, 2, 3, 4, 7, 9)),       // FOUR_MATCHES
                 new Lotto(List.of(1, 2, 3, 7, 8, 9)),       // THREE_MATCHES
                 new Lotto(List.of(1, 2, 7, 8, 9, 10)),      // NO_RANK
-                new Lotto(List.of(1, 8, 9, 10, 11, 12))  // NO_RANK
+                new Lotto(List.of(1, 8, 9, 10, 11, 12))     // NO_RANK
         );
 
         winningNumber = new WinningNumber(
@@ -67,8 +67,7 @@ public class LotteriesTest {
 
         // When & Then
         int count = 0;
-        for (Iterator<Lotto> it = lotteries.iterator(); it.hasNext(); ) {
-            Lotto lotto = it.next();
+        for (Lotto lotto : lotteries) {
             assertEquals(lottoList.get(count), lotto);
             count++;
         }
@@ -97,6 +96,15 @@ public class LotteriesTest {
     void nullListThrowsIllegalArgumentException() {
         // When & Then
         assertThatThrownBy(() -> Lotteries.of(null))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageStartingWith("[ERROR]");
+    }
+
+    @Test
+    @DisplayName("빈 리스트 입력 시 예외 발생 테스트")
+    void emptyListThrowsIllegalArgumentException() {
+        // When & Then
+        assertThatThrownBy(() -> Lotteries.of(List.of()))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageStartingWith("[ERROR]");
     }
