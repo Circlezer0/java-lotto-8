@@ -108,11 +108,19 @@ public class WinningNumberTest {
     @DisplayName("당첨 번호 개수가 6개가 아니면 예외가 발생한다.")
     void winningNumberCountNotSixTest() {
         // Given
-        List<Integer> winningNumbers = List.of(1, 11, 15, 29, 35);
-        int bonusNumber = 7;
+        List<Integer> lessWinningNumbers = List.of(1, 11, 15, 29, 35);
+        final int bonusNumber = 7;
 
         // When & Then
-        assertThatThrownBy(() -> new WinningNumber(winningNumbers, bonusNumber))
+        assertThatThrownBy(() -> new WinningNumber(lessWinningNumbers, bonusNumber))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageStartingWith("[ERROR]");
+
+        // Given
+        List<Integer> moreWinningNumbers = List.of(1, 11, 15, 29, 35, 40, 42);
+
+        // When & Then
+        assertThatThrownBy(() -> new WinningNumber(moreWinningNumbers, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageStartingWith("[ERROR]");
     }
