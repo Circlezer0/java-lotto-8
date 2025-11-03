@@ -41,8 +41,7 @@ public class OutputView {
     public void displayBoughtLotto(Lotteries lotteries) {
         System.out.printf(BOUGHT_COUNT_FORMAT, lotteries.size());
         System.out.println();
-        lotteries.iterator()
-                .forEachRemaining(lotto -> System.out.println(formatLottoNumbers(lotto)));
+        lotteries.forEach(lotto -> System.out.println(formatLottoNumbers(lotto)));
     }
 
     public void displayWinningInputGuide() {

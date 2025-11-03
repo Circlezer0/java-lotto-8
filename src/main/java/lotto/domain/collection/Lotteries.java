@@ -8,7 +8,7 @@ import lotto.domain.model.WinningNumber;
 import lotto.exception.LottoException;
 import lotto.exception.code.DomainErrorCode;
 
-public class Lotteries {
+public class Lotteries implements Iterable<Lotto> {
     private final List<Lotto> lotteries;
 
     private Lotteries(List<Lotto> lotteries) {
@@ -26,15 +26,16 @@ public class Lotteries {
         return lotteries.size();
     }
 
-    public Iterator<Lotto> iterator() {
-        return lotteries.iterator();
-    }
-
     public LottoResult evaluateAll(WinningNumber winningNumber) {
         List<PrizeTier> ranks = lotteries.stream()
                 .map(winningNumber::evaluatePrizeTier)
                 .toList();
 
         return LottoResult.from(ranks);
+    }
+
+    @Override
+    public Iterator<Lotto> iterator() {
+        return lotteries.iterator();
     }
 }
