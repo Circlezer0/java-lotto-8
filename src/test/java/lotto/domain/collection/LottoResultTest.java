@@ -42,19 +42,15 @@ public class LottoResultTest {
     }
 
     @Test
-    @DisplayName("빈 리스트도 허용되며 합계는 0, 모든 등수 카운트는 0")
-    void emptyListTest() {
+    @DisplayName("빈 리스트 입력 시 IllegalArgumentException 발생")
+    void emptyListThrowsIllegalArgumentException() {
         // Given
         List<PrizeTier> empty = List.of();
 
-        // When
-        LottoResult result = LottoResult.from(empty);
-
-        // Then
-        assertEquals(0L, result.totalPrize());
-        for (PrizeTier t : PrizeTier.values()) {
-            assertEquals(0, result.count(t));
-        }
+        // When & Then
+        assertThatThrownBy(() -> LottoResult.from(empty))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageStartingWith("[ERROR]");
     }
 
     @Test
