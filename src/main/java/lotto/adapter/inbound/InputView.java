@@ -16,7 +16,7 @@ public class InputView {
 
     public List<Integer> readIntegers() {
         String input = Console.readLine();
-        return Arrays.stream(input.split(DELIMITER))
+        return Arrays.stream(input.split(DELIMITER, -1))
                 .map(this::tryParseInteger)
                 .toList();
     }
