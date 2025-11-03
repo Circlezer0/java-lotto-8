@@ -2,6 +2,7 @@ package lotto.application.service;
 
 import java.util.List;
 import java.util.stream.IntStream;
+import lotto.application.port.input.LottoUseCase;
 import lotto.application.port.output.NumberGenerator;
 import lotto.domain.collection.Lotteries;
 import lotto.domain.collection.LottoResult;
@@ -11,7 +12,7 @@ import lotto.domain.utils.LottoGameRule;
 import lotto.domain.vo.Money;
 import lotto.domain.vo.Yield;
 
-public class LottoService {
+public class LottoService implements LottoUseCase {
 
     private final NumberGenerator numberGenerator;
 
@@ -19,7 +20,8 @@ public class LottoService {
         this.numberGenerator = numberGenerator;
     }
 
-    public Lotteries buyLotteries(Money money){
+    @Override
+    public Lotteries buyLotteries(Money money) {
         int lottoCount = money.purchaseQuantity(LottoGameRule.LOTTO_PRICE);
 
         List<Lotto> lotteries = IntStream.range(0, lottoCount)
@@ -29,14 +31,17 @@ public class LottoService {
         return Lotteries.of(lotteries);
     }
 
+    @Override
     public WinningNumber drawWinningNumber(List<Integer> winningNumbers, Integer bonusNumber) {
         return new WinningNumber(winningNumbers, bonusNumber);
     }
 
+    @Override
     public LottoResult evaluateLotteries(Lotteries lotteries, WinningNumber winningNumber) {
         return lotteries.evaluateAll(winningNumber);
     }
 
+    @Override
     public Yield calculateYield(Lotteries lotteries, LottoResult lottoResult) {
         long totalPrize = lottoResult.totalPrize();
         int spentMoney = lotteries.size() * LottoGameRule.LOTTO_PRICE;
