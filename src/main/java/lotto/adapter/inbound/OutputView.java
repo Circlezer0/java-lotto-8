@@ -20,7 +20,7 @@ public class OutputView {
             PrizeTier.FIVE_WITH_BONUS_MATCHES,
             PrizeTier.SIX_MATCHES
     );
-    private static final String RANK_RESULT_FORMAT = "%d개 일치%s %s - %d개";
+    private static final String PRIZE_RESULT_FORMAT = "%d개 일치%s %s - %d개";
     private static final String PRIZE_MONEY_FORMAT = "(%,d원)";
     private static final String BONUS_STRING = ", 보너스 볼 일치";
     private static final String YIELD_FORMAT = "총 수익률은 %s%%입니다.";
@@ -68,7 +68,7 @@ public class OutputView {
         if(prizeTier.hasBonus()){
             bonus = BONUS_STRING;
         }
-        return String.format(RANK_RESULT_FORMAT, prizeTier.matchCount(), bonus, prize, count);
+        return String.format(PRIZE_RESULT_FORMAT, prizeTier.matchCount(), bonus, prize, count);
     }
 
     private String formatLottoNumbers(Lotto lotto) {
