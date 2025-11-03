@@ -22,11 +22,11 @@ public class LottoService {
     public Lotteries buyLotteries(Money money){
         int lottoCount = money.purchaseQuantity(LottoGameRule.LOTTO_PRICE);
 
-        List<Lotto> lottos = IntStream.range(0, lottoCount)
+        List<Lotto> lotteries = IntStream.range(0, lottoCount)
                 .mapToObj(i -> new Lotto(makeLottoNumbers()))
                 .toList();
 
-        return Lotteries.of(lottos);
+        return Lotteries.of(lotteries);
     }
 
     public WinningNumber drawWinningNumber(List<Integer> winningNumbers, Integer bonusNumber) {
