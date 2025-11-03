@@ -13,7 +13,7 @@ public class Lotteries {
 
     private Lotteries(List<Lotto> lotteries) {
         if(lotteries == null || lotteries.isEmpty()) {
-            throw new LottoException(DomainErrorCode.LOTTO_LIST_CANNOT_BE_NULL);
+            throw new LottoException(DomainErrorCode.LOTTO_LIST_CANNOT_BE_NULL_OR_EMPTY);
         }
         this.lotteries = List.copyOf(lotteries);
     }

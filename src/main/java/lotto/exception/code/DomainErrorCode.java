@@ -12,10 +12,10 @@ public enum DomainErrorCode implements BaseErrorCode {
     NUMBERS_CANNOT_DUPLICATE("로또 번호는 중복될 수 없습니다."),
 
     // Lotteries
-    LOTTO_LIST_CANNOT_BE_NULL("로또 목록은 null일 수 없습니다."),
+    LOTTO_LIST_CANNOT_BE_NULL_OR_EMPTY("로또 목록은 null이거나 비어있을 수 없습니다."),
 
     // LottoResult
-    PRIZE_LIST_CANNOT_BE_NULL("당첨 결과 목록은 null일 수 없습니다."),
+    PRIZE_LIST_CANNOT_BE_NULL_OR_EMPTY("당첨 결과 목록은 null이거나 비어있을 수 없습니다."),
 
     // Money
     INVALID_MONEY_AMOUNT("유효하지 않은 금액입니다."),

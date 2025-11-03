@@ -16,7 +16,7 @@ public class LottoResult {
 
     public static LottoResult from(List<PrizeTier> calculatedPrizeTiers) {
         if(calculatedPrizeTiers == null || calculatedPrizeTiers.isEmpty()) {
-            throw new LottoException(DomainErrorCode.PRIZE_LIST_CANNOT_BE_NULL);
+            throw new LottoException(DomainErrorCode.PRIZE_LIST_CANNOT_BE_NULL_OR_EMPTY);
         }
 
         EnumMap<PrizeTier, Integer> counts = new EnumMap<>(PrizeTier.class);
