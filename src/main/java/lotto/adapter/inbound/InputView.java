@@ -11,20 +11,20 @@ public class InputView {
     private static final String DELIMITER = ",";
 
     public Integer readInteger() {
-        return parseIntegerOrThrow(Console.readLine());
+        return tryParseInteger(Console.readLine());
     }
 
     public List<Integer> readIntegers() {
         String input = Console.readLine();
         return Arrays.stream(input.split(DELIMITER))
-                .map(this::parseIntegerOrThrow)
+                .map(this::tryParseInteger)
                 .toList();
     }
 
-    private Integer parseIntegerOrThrow(String input) {
+    private Integer tryParseInteger(String input) {
         try {
             return Integer.parseInt(input.trim());
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             throw new LottoException(AdapterErrorCode.INVALID_INPUT_NUMBER);
         }
     }
