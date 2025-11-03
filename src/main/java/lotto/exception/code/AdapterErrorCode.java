@@ -9,7 +9,8 @@ public enum AdapterErrorCode implements BaseErrorCode {
     // RandomNumberGenerator
     INVALID_NUMBER_RANGE("숫자 생성기의 최소값, 최대값 범위 오류입니다."),
     INVALID_NUMBER_COUNT("생성할 숫자 개수는 음수일 수 없습니다."),
-    INSUFFICIENT_UNIQUE_NUMBERS("범위 내에서 고유한 숫자를 생성할 수 없습니다.")
+    INSUFFICIENT_UNIQUE_NUMBERS("범위 내에서 고유한 숫자를 생성할 수 없습니다."),
+    CONTROLLER_ALREADY_CLOSED("컨트롤러가 이미 종료되었습니다."),
     ;
 
     private final String message;

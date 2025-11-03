@@ -21,6 +21,10 @@ public class InputView {
                 .toList();
     }
 
+    public void closeConsole() {
+        Console.close();
+    }
+
     private Integer tryParseInteger(String input) {
         try {
             return Integer.parseInt(input.trim());

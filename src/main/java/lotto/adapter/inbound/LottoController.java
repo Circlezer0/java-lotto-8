@@ -9,19 +9,25 @@ import lotto.domain.model.WinningNumber;
 import lotto.domain.vo.Money;
 import lotto.domain.vo.Yield;
 import lotto.exception.LottoException;
+import lotto.exception.code.AdapterErrorCode;
 
 public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
     private final LottoUseCase lottoUseCase;
+    private boolean isClosed;
 
     public LottoController(InputView inputView, OutputView outputView, LottoUseCase lottoUseCase) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.lottoUseCase = lottoUseCase;
+        this.isClosed = false;
     }
 
     public void run() {
+        if (isClosed) {
+            throw new LottoException(AdapterErrorCode.CONTROLLER_ALREADY_CLOSED);
+        }
         Money money = readMoney();
         Lotteries lotteries = purchaseLotteries(money);
         displayBoughtLotteries(lotteries);
@@ -31,6 +37,14 @@ public class LottoController {
 
         Yield yield = lottoUseCase.calculateYield(lotteries, result);
         displayResult(result, yield);
+    }
+
+    public void close() {
+        if(isClosed) {
+            throw new LottoException(AdapterErrorCode.CONTROLLER_ALREADY_CLOSED);
+        }
+        inputView.closeConsole();
+        this.isClosed = true;
     }
 
     private Money readMoney() {
