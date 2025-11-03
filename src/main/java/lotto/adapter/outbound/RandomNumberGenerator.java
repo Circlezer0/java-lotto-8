@@ -2,7 +2,7 @@ package lotto.adapter.outbound;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.List;
-import lotto.application.output.NumberGenerator;
+import lotto.application.port.output.NumberGenerator;
 import lotto.exception.LottoException;
 import lotto.exception.code.AdapterErrorCode;
 

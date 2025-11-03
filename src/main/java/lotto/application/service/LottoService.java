@@ -1,8 +1,8 @@
-package lotto.application.input;
+package lotto.application.service;
 
 import java.util.List;
 import java.util.stream.IntStream;
-import lotto.application.output.NumberGenerator;
+import lotto.application.port.output.NumberGenerator;
 import lotto.domain.collection.Lotteries;
 import lotto.domain.collection.LottoResult;
 import lotto.domain.model.Lotto;

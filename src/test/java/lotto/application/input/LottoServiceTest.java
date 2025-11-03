@@ -9,6 +9,7 @@ import java.math.RoundingMode;
 import java.util.Iterator;
 import java.util.List;
 import lotto.adapter.outbound.RandomNumberGenerator;
+import lotto.application.service.LottoService;
 import lotto.domain.collection.Lotteries;
 import lotto.domain.collection.LottoResult;
 import lotto.domain.model.Lotto;

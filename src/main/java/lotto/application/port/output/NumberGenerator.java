@@ -1,4 +1,4 @@
-package lotto.application.output;
+package lotto.application.port.output;
 
 import java.util.List;
 

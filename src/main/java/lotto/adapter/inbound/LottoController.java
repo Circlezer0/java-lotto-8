@@ -2,7 +2,7 @@ package lotto.adapter.inbound;
 
 import java.util.List;
 import java.util.function.Supplier;
-import lotto.application.input.LottoService;
+import lotto.application.service.LottoService;
 import lotto.domain.collection.Lotteries;
 import lotto.domain.collection.LottoResult;
 import lotto.domain.model.WinningNumber;
