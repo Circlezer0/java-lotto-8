@@ -1,9 +1,12 @@
 package lotto;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersInRangeTest;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
@@ -50,6 +53,49 @@ class ApplicationTest extends NsTest {
     void 예외_테스트() {
         assertSimpleTest(() -> {
             runException("1000j");
+            assertThat(output()).contains(ERROR_MESSAGE);
+        });
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "-5000",
+            "0",
+            "2300000000",
+            "7000a"
+    })
+    @DisplayName("구매 금액 파싱 오류 테스트")
+    void purchaseAmountParsingError(String purchaseAmountInput) {
+        assertSimpleTest(() -> {
+            runException(purchaseAmountInput);
+            assertThat(output()).contains(ERROR_MESSAGE);
+        });
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "1,2,3,4,5,,6",
+            "1,2,3,4,5,3000000000",
+            "1,2,a,3,4,5"
+    })
+    @DisplayName("당첨 번호 파싱 오류 테스트")
+    void winningNumberParsingError(String winningNumbersInput) {
+        assertSimpleTest(() -> {
+            runException("5000", winningNumbersInput, "7");
+            assertThat(output()).contains(ERROR_MESSAGE);
+        });
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "3000000000",
+            "a",
+            "7,"
+    })
+    @DisplayName("보너스 번호 파싱 오류 테스트")
+    void bonusNumberParsingError(String bonusNumberInput) {
+        assertSimpleTest(() -> {
+            runException("5000", "1,2,3,4,5,6", bonusNumberInput);
             assertThat(output()).contains(ERROR_MESSAGE);
         });
     }
