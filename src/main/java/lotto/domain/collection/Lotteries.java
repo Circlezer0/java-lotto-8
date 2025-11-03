@@ -27,11 +27,11 @@ public class Lotteries implements Iterable<Lotto> {
     }
 
     public LottoResult evaluateAll(WinningNumber winningNumber) {
-        List<PrizeTier> ranks = lotteries.stream()
+        List<PrizeTier> prizeTiers = lotteries.stream()
                 .map(winningNumber::evaluatePrizeTier)
                 .toList();
 
-        return LottoResult.from(ranks);
+        return LottoResult.from(prizeTiers);
     }
 
     @Override
